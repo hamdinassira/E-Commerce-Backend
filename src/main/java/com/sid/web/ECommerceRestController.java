@@ -53,7 +53,7 @@ public class ECommerceRestController {
 	    }
 
 	@GetMapping(path = "/image/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
-	public byte[] image(@PathVariable(name="id") String id) throws Exception{
+	public byte[] image(@PathVariable(name="id") Long id) throws Exception{
 		Product product=productRepository.findById(id).get();
 		String photoName=product.getImage();
 		File file=new File(System.getProperty("user.home")+"/e Commerce/images/"+photoName+".jpg");
@@ -68,7 +68,7 @@ public class ECommerceRestController {
 	}
 	
 	@PostMapping(path="/uploadPhoto/{id}")
-	public void uploadPhoto(MultipartFile file, @PathVariable String id) throws Exception {
+	public void uploadPhoto(MultipartFile file, @PathVariable Long id) throws Exception {
 		Product p=productRepository.findById(id).get();
 		p.setImage(file.getOriginalFilename());
 		String photoName=p.getImage();

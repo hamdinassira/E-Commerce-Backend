@@ -14,7 +14,7 @@ import com.sid.entities.Product;
 
 @CrossOrigin("*")
 @RepositoryRestResource
-public interface CategorieRepository extends JpaRepository<Categorie, String> {
+public interface CategorieRepository extends JpaRepository<Categorie, Long> {
 	
 	//@CrossOrigin(methods = RequestMethod.POST)
 	//@RestResource(path="ajouterCategorie")

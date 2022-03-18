@@ -15,7 +15,7 @@ import com.sid.entities.Product;
 @CrossOrigin("*") //Pour autoriser tout les domaine a acceder a cet Api rest
 @RepositoryRestResource
 //public interface ProductRepository extends MongoRepository<Product, String> {
-public interface ProductRepository extends JpaRepository<Product, String> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 	
     @RestResource(path="selected")
 	public List<Product> findBySelectedIsTrue();

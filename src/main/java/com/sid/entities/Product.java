@@ -6,12 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-//import javax.persistence.Id;
+import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 
-import org.springframework.data.annotation.Id;
+//import org.springframework.data.annotation.Id;
 //import org.springframework.data.mongodb.core.mapping.DBRef;
 //import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -26,8 +26,8 @@ import lombok.ToString;
 @Data @NoArgsConstructor @AllArgsConstructor @ToString
 public class Product implements Serializable{
 	
-	@Id 
-	private String id;
+	@Id  @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	@Column(length = 100)
 	private String name;
 	private String description;

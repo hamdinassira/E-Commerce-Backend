@@ -7,10 +7,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-//import javax.persistence.Id;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import org.springframework.data.annotation.Id;
+//import org.springframework.data.annotation.Id;
 //import org.springframework.data.mongodb.core.mapping.DBRef;
 //import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -28,8 +28,8 @@ import lombok.ToString;
 @Data @NoArgsConstructor @AllArgsConstructor @ToString
 public class Categorie implements Serializable{
 	
-	@Id
-	private String idCategorie;
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long idCategorie;
 	@Column(length = 100)
 	private String nom;
 	
