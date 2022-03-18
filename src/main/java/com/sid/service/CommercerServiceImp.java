@@ -23,6 +23,9 @@ import com.sid.entities.Categorie;
 import com.sid.entities.Commande;
 import com.sid.entities.LigneCart;
 import com.sid.entities.Product;
+
+import net.bytebuddy.utility.RandomString;
+
 import com.sid.entities.Compte;
 import com.sid.entities.Facture;
 
@@ -30,20 +33,47 @@ import com.sid.entities.Facture;
 @Service
 public class CommercerServiceImp implements ICommercerService{
 
-	@Autowired
+	//@Autowired
 	private CartRepository cartRepository;
-	@Autowired
+	//@Autowired
 	private LigneCartRepository ligneCartRepository;
-	@Autowired
+	//@Autowired
 	private CategorieRepository categorieRepository;
-	@Autowired
+	//@Autowired
 	private CommandeRepository commandeRepository;
-	@Autowired
+	//@Autowired
 	private CompteRepository compteRepository;
-	@Autowired
+	//@Autowired
 	private FactureRepository factureRepository;
-	@Autowired
+	//@Autowired
 	private ProductRepository productRepository;
+	
+
+	
+	public CommercerServiceImp(CategorieRepository categorieRepository, 
+			                   ProductRepository productRepository,
+			                   CartRepository cartRepository,
+			                   LigneCartRepository ligneCartRepository,
+			                   CommandeRepository commandeRepository,
+			                   CompteRepository compteRepository,
+			                   FactureRepository factureRepository) {
+		
+		this.categorieRepository = categorieRepository;
+		this.cartRepository=cartRepository;
+		this.commandeRepository=commandeRepository;
+		this.compteRepository=compteRepository;
+		this.factureRepository=factureRepository;
+		this.ligneCartRepository=ligneCartRepository;
+		this.productRepository=productRepository;
+	}
+	
+	
+	 public List<Product> listAll(String keyword) {
+	        if (keyword != null) {
+	            //return productRepository.search(keyword);
+	        }
+	        return productRepository.findAll();
+	    }
 	
 	@Override
 	public void initCart() {
@@ -64,6 +94,7 @@ public class CommercerServiceImp implements ICommercerService{
 	@Override
 	public void initCategorie() {
 		// TODO Auto-generated method stub
+		categorieRepository.deleteAll();
 		Stream.of("informatique", "electronique", "sport", "Téléphone et tablette")
 		.forEach(categorieName ->{
 			Categorie categorie=new Categorie();
@@ -77,6 +108,7 @@ public class CommercerServiceImp implements ICommercerService{
 	@Override
 	public void initCommande() {
 		// TODO Auto-generated method stub
+		
 		Date date=new Date();
 		factureRepository.findAll().forEach(f->{
 			Commande commande=new Commande();
@@ -118,6 +150,7 @@ public class CommercerServiceImp implements ICommercerService{
 	@Transactional
 	public void initProduct() {
 		// TODO Auto-generated method stub
+		productRepository.deleteAll();
 		double[] prix=new double[] {1089.00 , 1129.00, 39.90, 479.00};
 		categorieRepository.findAll().forEach(c ->{
 			Stream.of("Ordinateurs", "Télévision", "Sport et Fitnesse", "Smartphones")
@@ -132,11 +165,13 @@ public class CommercerServiceImp implements ICommercerService{
 					Random rnd=new Random();
 					 product.setName(productName);
 					    product.setDescription(descriptionProoduct);
-					    product.setPrice(prix[(int) new Random().nextDouble()]);
-					    product.setImage(productName.toLowerCase());
+					    product.setPrice(100+rnd.nextInt(10000));
+					    
+						product.setImage(RandomString.make(10));
 					    product.setStock(rnd.nextBoolean());
 					    product.setPromotion(rnd.nextBoolean());
 					    product.setSelected(rnd.nextBoolean());
+					    product.setReference(RandomString.make(10));
 					    product.setCategorie(c);
 			    //product.setLigneCart(ligneCart);
 			    productRepository.save(product);

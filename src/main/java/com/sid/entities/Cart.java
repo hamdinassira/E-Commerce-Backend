@@ -23,7 +23,7 @@ public class Cart implements Serializable{
 	private Long idCart;
 	private double prixTotal;
 	@OneToMany(mappedBy = "cart")
-	@JsonProperty(access = Access.WRITE_ONLY)
+	//@JsonProperty(access = Access.WRITE_ONLY)
     private Collection<LigneCart> ligneCarts;
     
 

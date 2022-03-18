@@ -6,8 +6,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import com.sid.entities.Categorie;
 import com.sid.entities.Commande;
@@ -16,6 +16,7 @@ import com.sid.service.ICommercerService;
 
 
 @SpringBootApplication
+@CrossOrigin("*")
 public class ECommerce1Application implements CommandLineRunner{
 
 	@Autowired
@@ -23,6 +24,7 @@ public class ECommerce1Application implements CommandLineRunner{
 	
 	@Autowired
 	private RepositoryRestConfiguration repositoryRestConfiguration;//utiliser pour dire a spring data rest d'exposer l'id
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ECommerce1Application.class, args);
