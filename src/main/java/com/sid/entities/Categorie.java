@@ -34,9 +34,8 @@ public class Categorie implements Serializable{
 	private String nom;
 	
 	//@JsonProperty(access = Access.WRITE_ONLY)
-	
-	@OneToMany(mappedBy = "categorie")//Association bidirectionnel
 	//@DBRef
+	@OneToMany(mappedBy = "categorie")//Association bidirectionnel
 	private Collection<Product> products;
 
 }
